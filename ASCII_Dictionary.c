@@ -1,3 +1,4 @@
+/// @Author: Ron Zilber
 // Defines
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -8,7 +9,7 @@
 #define letterz 122
 #define letterA 65
 #define letterZ 90
-#define LINE_SIZE 20   // Stand for End of Line
+#define LINE_SIZE 20 
 
 // Includes
 #include <stdio.h>
