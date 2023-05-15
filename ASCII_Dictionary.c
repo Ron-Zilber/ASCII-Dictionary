@@ -8,6 +8,7 @@
 #define letterz 122
 #define letterA 65
 #define letterZ 90
+#define LINE_SIZE 20   // Stand for End of Line
 
 // Includes
 #include <stdio.h>
@@ -18,19 +19,19 @@
 
 void printMenu();
 int checkString(char[]);
-void printWords(char[][20],int);
-void insertStrings(char[][20],int);
+void printWords(char[][LINE_SIZE],int);
+void insertStrings(char[][LINE_SIZE],int);
 int getSize(int,int);
 int asciiSum(char[]);
 int power(int,int);
 double asciiAvg(char[]);
-void sortStringsLexicographic(char[][20],int);
-void sortStringsByLength(char[][20],int);
-void sortStringsByAsciiAvg(char[][20],int);
-void sortStringsByAsciiSum(char[][20],int);
-void sortEachString(char[][20],int);
+void sortStringsLexicographic(char[][LINE_SIZE],int);
+void sortStringsByLength(char[][LINE_SIZE],int);
+void sortStringsByAsciiAvg(char[][LINE_SIZE],int);
+void sortStringsByAsciiSum(char[][LINE_SIZE],int);
+void sortEachString(char[][LINE_SIZE],int);
 void sortString(char[]);
-void sortAllAsOne(char[][20],int);
+void sortAllAsOne(char[][LINE_SIZE],int);
 void swapStrings(char[],char[]);
 void swapInts(int *, int, int);
 void swapDoubles(double *, int, int);
@@ -40,7 +41,7 @@ int stringToNumConvert(char[]);
 int spaceAndTabClassifier(char[]);
 int isNum(char[]);
 int getState();
-char wordList[10][20];
+char wordList[10][LINE_SIZE];
 int N = 0; int error = 0;
 void FSM(int);
 
@@ -111,7 +112,7 @@ void FSM(int a) {
     }
 }
 void swapStrings(char str1[], char str2[]){
-    char temp[20];
+    char temp[LINE_SIZE];
     strcpy(temp,str1);
     strcpy(str1,str2);
     strcpy(str2,temp);
@@ -128,7 +129,7 @@ void swapDoubles(double * Arr, int i, int j){
     Arr[i] = Arr[j];
     Arr[j] = temp;
 }
-void printWords(char aArr[][20],int wordsCount){
+void printWords(char aArr[][LINE_SIZE],int wordsCount){
     if(N==0){
         fflush(stdin);fflush(stdout);
         printf("There are no words, cannot operate.\n");
@@ -225,7 +226,7 @@ int checkString(char aArr[]) {
     fflush(stdin); fflush(stdout);
     fgets(temp, 199, stdin);
     is_AlphaBetic = isAlphabetic(temp);
-    if (20 >= strlen(temp) && is_AlphaBetic) {
+    if (LINE_SIZE >= strlen(temp) && is_AlphaBetic) {
         strcpy(aArr,temp);
         int k;
         for(k = 0;; k++) {
@@ -317,7 +318,7 @@ void printMenu(){
            "8. Sort all words as one\n"
            "Please enter a number between 0 and 99:");
 }
-void sortStringsByAsciiSum(char aArr[][20],int aLength) {
+void sortStringsByAsciiSum(char aArr[][LINE_SIZE],int aLength) {
     if (N == 0) {
         fflush(stdin); fflush(stdout);
         printf("There are no words, cannot operate.\n");
@@ -339,7 +340,7 @@ void sortStringsByAsciiSum(char aArr[][20],int aLength) {
     }
     }
 }
-void sortStringsByAsciiAvg(char aArr[][20],int aLength){
+void sortStringsByAsciiAvg(char aArr[][LINE_SIZE],int aLength){
     if(N==0){
         fflush(stdin);fflush(stdout);
         printf("There are no words, cannot operate.\n");
@@ -362,7 +363,7 @@ void sortStringsByAsciiAvg(char aArr[][20],int aLength){
         }
     }
 }
-void sortStringsByLength(char aArr[][20],int aLength){
+void sortStringsByLength(char aArr[][LINE_SIZE],int aLength){
     if(N==0){
         fflush(stdin);fflush(stdout);
         printf("There are no words, cannot operate.\n");
@@ -438,7 +439,7 @@ int spaceAndTabClassifier(char aArr[]) {
     }
     return legitSpaceAndTabs;
 }
-void sortStringsLexicographic(char aArr[][20],int aLength){
+void sortStringsLexicographic(char aArr[][LINE_SIZE],int aLength){
     if(N==0){
         fflush(stdin);fflush(stdout);
         printf("There are no words, cannot operate.\n");
@@ -446,7 +447,7 @@ void sortStringsLexicographic(char aArr[][20],int aLength){
     else {
         int words = aLength;
         int i, j;
-        char temp[20];
+        char temp[LINE_SIZE];
         for (i = 0; i < words-1; i++) {
             for (j = 0; j < words-i-1; j++) {
                 if (strcmp(aArr[j], aArr[j+1]) > 0) {
@@ -459,7 +460,7 @@ void sortStringsLexicographic(char aArr[][20],int aLength){
 
     }
 }
-void sortEachString(char aArr[][20],int aLength){
+void sortEachString(char aArr[][LINE_SIZE],int aLength){
     if(N==0){
         fflush(stdin);fflush(stdout);
         printf("There are no words, cannot operate.\n");
@@ -469,8 +470,8 @@ void sortEachString(char aArr[][20],int aLength){
         int i, j, k;
         char temp;
         for (i = 0; i < words; i++) {
-            for (j = 0; j < 20; j++) {
-                for (k = j + 1; k < 20; k++) {
+            for (j = 0; j < LINE_SIZE; j++) {
+                for (k = j + 1; k < LINE_SIZE; k++) {
                     if (aArr[i][k] == 0)
                         break;
                     if (aArr[i][j] > aArr[i][k]) {
@@ -498,7 +499,7 @@ int isAlphabetic(char aArr[]){
     return 0;
 
 }
-void insertStrings(char aArr[][20], int aLength){
+void insertStrings(char aArr[][LINE_SIZE], int aLength){
     int i=0; int validityBits[10]={0};
     N = aLength;
     while(i<N){
@@ -516,7 +517,7 @@ void insertStrings(char aArr[][20], int aLength){
         }
         }
     }
-void sortAllAsOne(char aArr[][20], int aLength){
+void sortAllAsOne(char aArr[][LINE_SIZE], int aLength){
     if(N==0){
         fflush(stdin);fflush(stdout);
         printf("There are no words, cannot operate.\n");
@@ -524,11 +525,11 @@ void sortAllAsOne(char aArr[][20], int aLength){
     else {
         int words = aLength;
         int i, j, k = 0;
-        char temp[20*words];
+        char temp[LINE_SIZE*words];
         memset(temp, '\0', sizeof temp);
         while (k < 200) {
             for (i = 0; i < words; i++) {
-                for (j = 0; j < 20; j++) {
+                for (j = 0; j < LINE_SIZE; j++) {
                     if (aArr[i][j] == '\0')
                         break;
                     temp[k] = aArr[i][j];
@@ -541,7 +542,7 @@ void sortAllAsOne(char aArr[][20], int aLength){
         k = 0;
         while ((k < 200 )) {
             for (i = 0; i < words; i++) {
-                for (j = 0; j < 20; j++) {
+                for (j = 0; j < LINE_SIZE; j++) {
                     if (aArr[i][j] == '\0') {
                         break;
                     }
